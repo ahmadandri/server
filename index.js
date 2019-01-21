@@ -17,11 +17,11 @@ app.use(function(req, res, next) {
     next();
 });
 
-http.listen(2000, () => {
+/*http.listen(2000, () => {
   console.log('started on port 2000');
-});
-
-
+});*/
+http.listen(process.env.PORT || 2000);
+console.log('started on port 2000');
 
 MongoClient.connect('mongodb://saya:saya04@ds153394.mlab.com:53394/dokumen',{useNewUrlParser:true}, function(err,db){
 	if(err){
