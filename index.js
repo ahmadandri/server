@@ -2,6 +2,7 @@ let app = require('express')();
 let http = require('http').Server(app);
 let io = require('socket.io')(http);
 let bodyParser = require("body-parser");
+var cors = require('cors');
 let USERS = [];
 var pengguna
 var MongoClient = require('mongodb').MongoClient;
@@ -9,7 +10,7 @@ var MongoClient = require('mongodb').MongoClient;
 var url = 'mongodb://saya:saya04@ds153394.mlab.com:53394/dokumen';
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(cors());
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -20,6 +21,8 @@ http.listen(2000, () => {
   console.log('started on port 2000');
 });
 
+
+
 MongoClient.connect('mongodb://saya:saya04@ds153394.mlab.com:53394/dokumen',{useNewUrlParser:true}, function(err,db){
 	if(err){
 		console.log(err);
@@ -28,6 +31,7 @@ MongoClient.connect('mongodb://saya:saya04@ds153394.mlab.com:53394/dokumen',{use
 	}
 });
 
+//io.set('transport',['websocket']);
 io.on('connection', (socket) => {
 
 //Fungsi untuk registrasi
