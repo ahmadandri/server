@@ -34,8 +34,8 @@ app.use(function(req, res, next) {
   next();
 });
 
-http.listen(2000, () => {
-  console.log('started on port 2000');
+http.listen(80, () => {
+  console.log('started on port 80');
 });
 
 /*http.listen(process.env.PORT || 2000);
