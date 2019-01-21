@@ -37,21 +37,10 @@ app.use(function(req, res, next) {
 /*http.listen(2000, () => {
   console.log('started on port 2000');
 });*/
-
-var whitelist = ['https://document04.herokuapp.com/']
-var corsOptionsDelegate = function (req, callback) {
-  var corsOptions;
-  if (whitelist.indexOf(req.header('Origin')) !== -1) {
-    corsOptions = { origin: true }
-    console.log(corsOptions) // reflect (enable) the requested origin in the CORS response
-  } else {
-    corsOptions = { origin: false }
-    console.log(corsOptions) // disable CORS for this request
-  }
-  callback(null, corsOptions)
-  console.log(corsOptions) // callback expects two parameters: error and options
-}
-
+io.configure(function () {
+	io.set('transports', ['xhr-polling']);
+	io.set('transports', ['websocket','xhr-polling'])
+});
 
 http.listen(process.env.PORT || 2000);
 console.log('started on port 2000');
